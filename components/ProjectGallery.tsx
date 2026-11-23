@@ -70,7 +70,7 @@ export default function ProjectGallery({
           >
             <div>
               <p className="text-xs uppercase tracking-[0.24em] text-signal-soft">
-                {pick(project.category, lang)} · {project.system}
+                {[pick(project.category, lang), project.system].filter(Boolean).join(" · ")}
               </p>
               <h3 className="mt-1 font-display text-lg tracking-brand md:text-xl">
                 {project.title}

@@ -2,7 +2,7 @@
 title: "Por qué nos la jugamos con Void Incubus"
 date: "2026-10-16"
 excerpt: "No es el sistema más conocido ni el más vendido. Te contamos por qué, aun así, decidimos traerlo a España y Portugal."
-cover: "/images/about.jpg"
+cover: "/images/floridance.jpg"
 lang: "es"
 author: "VONE"
 tags: ["Void", "Sistemas"]

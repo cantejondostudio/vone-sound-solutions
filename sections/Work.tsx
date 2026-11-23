@@ -13,6 +13,36 @@ import { cn } from "@/lib/utils";
 const VIEW: L = { es: "Ver galería", en: "View gallery", fr: "Voir la galerie", de: "Galerie ansehen" };
 const PHOTOS: L = { es: "fotos", en: "photos", fr: "photos", de: "Fotos" };
 
+/** Brand wave pattern, used as the cover of projects that have no photos yet. */
+const BARS = Array.from({ length: 48 }, (_, i) => {
+  const t = i / 47;
+  return Math.round(
+    24 + 190 * Math.sin(Math.PI * t) * Math.abs(Math.sin(t * Math.PI * 3)) ** 0.9
+  );
+});
+
+function WaveCover() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 960 660"
+      preserveAspectRatio="xMidYMid slice"
+      className="absolute inset-0 h-full w-full opacity-80 transition-transform duration-[1.2s] ease-signal group-hover:scale-105"
+    >
+      <defs>
+        <linearGradient id="wave-cover" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="960" y2="0">
+          <stop offset="0" stopColor="#ea00ff" />
+          <stop offset="0.5" stopColor="#00e2ff" />
+          <stop offset="1" stopColor="#a4ff00" />
+        </linearGradient>
+      </defs>
+      {BARS.map((h, i) => (
+        <rect key={i} x={i * 20 + 7} y={300 - h} width="6" height={h * 2} rx="3" fill="url(#wave-cover)" />
+      ))}
+    </svg>
+  );
+}
+
 export default function Work() {
   const { lang, ui } = useLanguage();
   const [filter, setFilter] = useState<"all" | "festival" | "private">("all");
@@ -75,13 +105,17 @@ export default function Work() {
                 )}
               >
                 <div className="absolute inset-0 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`/images/${item.id}.jpg`}
-                    alt={`${item.title}, ${item.system}`}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover grayscale-[0.15] transition-transform duration-[1.2s] ease-signal group-hover:scale-105"
-                  />
+                  {item.gallery.length > 0 ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={`/images/${item.id}.jpg`}
+                      alt={item.system ? `${item.title}, ${item.system}` : item.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover grayscale-[0.15] transition-transform duration-[1.2s] ease-signal group-hover:scale-105"
+                    />
+                  ) : (
+                    <WaveCover />
+                  )}
                 </div>
                 <div className="absolute inset-0 bg-ink-900/30 transition-colors duration-700 group-hover:bg-ink-900/10" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/30 to-transparent" />
@@ -92,9 +126,11 @@ export default function Work() {
                     <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] uppercase tracking-widest text-chalk-muted">
                       {pick(item.category, lang)}
                     </span>
-                    <span className="text-xs uppercase tracking-widest text-signal-soft">
-                      {item.system}
-                    </span>
+                    {item.system && (
+                      <span className="text-xs uppercase tracking-widest text-signal-soft">
+                        {item.system}
+                      </span>
+                    )}
                   </div>
 
                   <div>
@@ -102,23 +138,27 @@ export default function Work() {
                     <h3 className="mt-2 font-display text-2xl tracking-brand md:text-3xl">
                       {item.title}
                     </h3>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm text-signal-soft">
-                      {pick(VIEW, lang)} · {item.gallery.length} {pick(PHOTOS, lang)}
-                      <span aria-hidden className="transition-transform duration-500 ease-signal group-hover:translate-x-1">
-                        &rarr;
+                    {item.gallery.length > 0 && (
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm text-signal-soft">
+                        {pick(VIEW, lang)} · {item.gallery.length} {pick(PHOTOS, lang)}
+                        <span aria-hidden className="transition-transform duration-500 ease-signal group-hover:translate-x-1">
+                          &rarr;
+                        </span>
                       </span>
-                    </span>
+                    )}
                   </div>
                 </div>
 
                 {/* Whole card opens the project gallery */}
-                <button
-                  type="button"
-                  onClick={() => setOpen(item)}
-                  aria-label={`${pick(VIEW, lang)}: ${item.title}`}
-                  data-cursor={pick(VIEW, lang)}
-                  className="absolute inset-0 z-10 rounded-4xl"
-                />
+                {item.gallery.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setOpen(item)}
+                    aria-label={`${pick(VIEW, lang)}: ${item.title}`}
+                    data-cursor={pick(VIEW, lang)}
+                    className="absolute inset-0 z-10 rounded-4xl"
+                  />
+                )}
               </motion.article>
             ))}
           </AnimatePresence>

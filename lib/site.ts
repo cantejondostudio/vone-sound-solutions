@@ -201,7 +201,7 @@ export type CaseStudy = {
   client: string;
   category: L;
   categoryKey: "festival" | "private";
-  system: string;
+  system?: string;
   gallery: GalleryPhoto[];
 };
 
@@ -244,20 +244,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    id: "retrohalloween",
-    title: "Retro Halloween",
-    client: "RaveArt",
-    categoryKey: "private",
-    category: CAT_PRIVATE,
-    system: "Arclite",
-    gallery: [
-      { src: `${W}/retro-1.jpg`, caption: { es: "La pista llena bajo la carpa.", en: "A packed floor under the tent.", fr: "Une piste pleine sous le chapiteau.", de: "Volle Tanzfläche unter dem Zelt." } },
-      { src: `${W}/retro-2.jpg`, caption: { es: "La carpa principal vista desde arriba.", en: "The main tent seen from above.", fr: "Le chapiteau principal vu d'en haut.", de: "Das Hauptzelt von oben." } },
-      { src: `${W}/retro-3.jpg`, caption: { es: "Subidón en primera fila durante el set.", en: "Front-row high during the set.", fr: "Euphorie au premier rang pendant le set.", de: "Ekstase in der ersten Reihe während des Sets." } },
-      { src: `${W}/retro-4.jpg`, caption: { es: "Chispas y pirotecnia detrás de la cabina.", en: "Sparks and pyro behind the booth.", fr: "Étincelles et pyrotechnie derrière la cabine.", de: "Funken und Pyro hinter dem Pult." } },
-      { src: `${W}/retro-5.jpg`, caption: { es: "Desde la cabina, frente a toda la carpa.", en: "From the booth, facing the whole tent.", fr: "Depuis la cabine, face à tout le chapiteau.", de: "Vom Pult aus, mit Blick auf das ganze Zelt." } },
-      { src: `${W}/retro-6.jpg`, caption: { es: "La carpa llena con luz cálida.", en: "The packed tent under warm light.", fr: "Le chapiteau plein sous une lumière chaude.", de: "Das volle Zelt in warmem Licht." } },
-    ],
+    // Sin fotos todavía: la tarjeta se pinta con el motivo de ondas y sin galería.
+    id: "ameba",
+    title: "Ameba Festival",
+    client: "Ameba Festival",
+    categoryKey: "festival",
+    category: CAT_FESTIVAL,
+    gallery: [],
   },
   {
     id: "ppm",
@@ -348,6 +341,5 @@ export const CLIENTS = [
   "AMEBA FESTIVAL",
   "P.P.M. EVENTS",
   "SKIZODELIC MIND CREW",
-  "RAVEART",
   "VOID ACOUSTICS",
 ];
