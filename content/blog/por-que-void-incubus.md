@@ -14,7 +14,7 @@ Ese sistema, para nosotros, es Void Incubus.
 
 ## Qué tiene de distinto
 
-Incubus es un sistema horn-loaded de 5 vías. Sin entrar en tecnicismos: usa trompas en todas las vías para mover mucho aire con poco esfuerzo. Eso se traduce en dos cosas que importan en un directo.
+Incubus es un sistema horn-loaded de 5 vías. Sin entrar en tecnicismos: los tops y los subgraves trabajan para mover mucho aire con poco esfuerzo. Eso se traduce en dos cosas que importan en un directo.
 
 - **Pega sin cansar.** Puedes subir el nivel y el graves sigue siendo graves, no un zumbido que te revienta el pecho a lo tonto.
 - **Claridad cuando hay mucha gente.** En una pista llena, la voz y la melodía no se pierden. Se entiende lo que suena.
